@@ -7,15 +7,18 @@ SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 
 
+wp post delete $(wp post list --post_type='product' --post_status=trash  --format=ids --path=$wpPath) --force --path=$wpPath
 
+wp post delete $(wp post list --post_type='post' --post_status=trash  --format=ids --path=$wpPath) --force --path=$wpPath
+
+wp post delete $(wp post list --post_type='page' --post_status=trash  --format=ids --path=$wpPath) --force --path=$wpPath
 
 wp post delete $(wp post list --post_status=trash --format=ids --path=$wpPath) --force --path=$wpPath
-
-wp post delete $(wp post list --post_status=draft --format=ids --path=$wpPath) --force --path=$wpPath
 
 wp post delete $(wp post list --post_type='revision' --format=ids --path=$wpPath) --force --path=$wpPath
 
 wp comment delete $(wp comment list --status=spam --format=ids --path=$wpPath) --force --path=$wpPath
+wp comment delete $(wp comment list --status=trash --format=ids --path=$wpPath) --path=$wpPath
 
 wp transient delete --expired --path=$wpPath
 
